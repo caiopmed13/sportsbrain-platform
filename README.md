@@ -80,3 +80,11 @@ No secrets live in this repo. The Worker reads runtime secrets via `wrangler sec
 ---
 
 *Built by Caio — Data Analyst & Data Lead. A personal R&D project to push my data-engineering, statistics and ML-in-production skills end-to-end.*
+
+---
+
+## Usage & rights
+
+This repository is **source-available for review** in a portfolio / hiring context — it is **not** open-source. No license is granted to use, copy, modify, or redistribute the code. The data-ingestion layer and the proprietary prediction / odds / signal logic are intentionally **withheld or reduced to stubs**; what remains is meant to demonstrate engineering, not to be run or reused.
+
+© 2026 Caio. All rights reserved.
