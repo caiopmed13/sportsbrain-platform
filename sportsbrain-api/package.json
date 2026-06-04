@@ -1,0 +1,24 @@
+{
+  "name": "sportsbrain-api",
+  "version": "1.0.0",
+  "description": "SportsBrain Data API — Professional sports intelligence platform",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev --local",
+    "deploy": "wrangler deploy",
+    "db:init": "wrangler d1 execute sportsbrain-db --file=./schema.sql",
+    "db:init:local": "wrangler d1 execute sportsbrain-db --local --file=./schema.sql",
+    "tail": "wrangler tail",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "devDependencies": {
+    "esbuild": "^0.27.4",
+    "vitest": "^1.6.0",
+    "wrangler": "^4.87.0"
+  },
+  "dependencies": {
+    "@neondatabase/serverless": "^1.1.0"
+  }
+}

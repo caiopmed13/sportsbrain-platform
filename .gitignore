@@ -1,0 +1,45 @@
+# ──────────────────────────────────────────────────────────────
+# Secrets & environment — never commit
+# ──────────────────────────────────────────────────────────────
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+.master_key
+.dev.vars
+# wrangler local secrets
+.wrangler/
+
+# ──────────────────────────────────────────────────────────────
+# Dependencies & build output
+# ──────────────────────────────────────────────────────────────
+node_modules/
+dist/
+dist_build/
+build/
+.vercel/
+target/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# ──────────────────────────────────────────────────────────────
+# Data & local artifacts
+# ──────────────────────────────────────────────────────────────
+*.db
+*.db-journal
+*.sqlite
+*.log
+*.log.old
+.cartola_tmp/
+.scores365_tmp/
+
+# ──────────────────────────────────────────────────────────────
+# IDE / OS
+# ──────────────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db

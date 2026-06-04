@@ -1,0 +1,388 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   SportsBrain — Polish + Motion + A11Y v8 "Aragão"
+   ─────────────────────────────────────────────────────────────────────
+   Microinterações refinadas, focus states, mobile tuning, contrast bumps.
+   Importado por ÚLTIMO (depois de global.css + pages.v8.css) em main.jsx.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ─── Smooth font rendering ──────────────────────────────────────────────── */
+html { text-rendering: optimizeLegibility; }
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* ─── Focus visible refinado (WCAG AA+) ─────────────────────────────────── */
+:focus { outline: none; }
+:focus-visible {
+  outline: 2px solid var(--edge-500);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+  transition: outline-offset 0.1s ease;
+}
+button:focus-visible,
+a:focus-visible,
+[role="tab"]:focus-visible,
+[role="button"]:focus-visible {
+  outline-offset: 3px;
+  box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.15);
+}
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline-offset: 0;
+  box-shadow: var(--glow-edge);
+}
+
+/* ─── Skip to main link (a11y) ──────────────────────────────────────────── */
+.skip-to-main {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  background: var(--edge-500);
+  color: var(--text-on-edge);
+  padding: var(--sp-2) var(--sp-4);
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  z-index: 1000;
+}
+.skip-to-main:focus {
+  left: var(--sp-3);
+  top: var(--sp-3);
+}
+
+/* ─── Card hover micro-elevation ─────────────────────────────────────────── */
+.card:hover,
+.pick-card:hover,
+.match-card:hover,
+.tip-card:hover,
+.kpi-card:hover,
+.metric-card:hover,
+.faixa-method-card:hover,
+.faixa-method-group:hover {
+  transform: translateY(-1px);
+  transition: transform var(--dur-base) var(--ease-out),
+              border-color var(--dur-fast) var(--ease-out);
+}
+.card:active,
+.pick-card:active,
+.match-card:active,
+.faixa-method-card:active,
+.faixa-method-group:active {
+  transform: translateY(0);
+  transition: transform 0.06s ease-out;
+}
+
+/* ─── Button press feedback ─────────────────────────────────────────────── */
+.btn:not(:disabled):active,
+button:not(:disabled):active {
+  transform: scale(0.98);
+}
+
+/* ─── Sidebar nav-item slide-in indicator ───────────────────────────────── */
+.nav-item {
+  position: relative;
+  overflow: hidden;
+}
+.nav-item::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  background: var(--edge-500);
+  opacity: 0;
+  transform: translateX(-100%);
+  transition: transform var(--dur-base) var(--ease-out),
+              opacity var(--dur-fast) var(--ease-out);
+  pointer-events: none;
+  border-radius: var(--radius-md);
+}
+.nav-item:hover::after { opacity: 0; }
+
+/* ─── Loading shimmer refinado ──────────────────────────────────────────── */
+@keyframes shimmer {
+  from { background-position: 200% 0; }
+  to   { background-position: -200% 0; }
+}
+.skeleton {
+  background: linear-gradient(90deg,
+    var(--ink-2) 0%,
+    var(--ink-3) 50%,
+    var(--ink-2) 100%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s linear infinite;
+  border-radius: var(--radius-md);
+  position: relative;
+  overflow: hidden;
+}
+.skeleton-text { height: 12px; border-radius: var(--radius-sm); margin: 4px 0; }
+.skeleton-title { height: 20px; width: 60%; border-radius: var(--radius-sm); margin: 6px 0; }
+.skeleton-card { min-height: 80px; }
+
+/* ─── Smooth scroll ─────────────────────────────────────────────────────── */
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .card:hover, .pick-card:hover, .match-card:hover,
+  .faixa-method-card:hover, .faixa-method-group:hover {
+    transform: none;
+  }
+}
+
+/* ─── Edge highlight em positive EV displays ────────────────────────────── */
+.ev-positive,
+.ev-pos,
+[data-ev="positive"] {
+  color: var(--edge-500) !important;
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+}
+.ev-negative,
+.ev-neg,
+[data-ev="negative"] {
+  color: var(--neg-500) !important;
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+}
+.ev-neutral,
+[data-ev="zero"] {
+  color: var(--text-3) !important;
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+}
+
+/* ─── Tabular nums em ALL números financeiros ───────────────────────────── */
+.odd,
+.odds,
+.price,
+.value,
+.amount,
+.percentage,
+.prob,
+.probability {
+  font-variant-numeric: tabular-nums slashed-zero !important;
+  font-feature-settings: 'tnum', 'zero';
+}
+
+/* ─── Dropdown / select refinado ────────────────────────────────────────── */
+select {
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'><path d='M1 1.5l5 5 5-5' stroke='%23797f8c' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right var(--sp-3) center;
+  background-size: 10px;
+  padding-right: var(--sp-8) !important;
+}
+
+/* ─── Checkbox / radio refinado ──────────────────────────────────────────── */
+input[type="checkbox"],
+input[type="radio"] {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--edge-500);
+  cursor: pointer;
+}
+
+/* ─── Range slider ───────────────────────────────────────────────────────── */
+input[type="range"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 100%;
+  height: 4px;
+  background: var(--ink-3);
+  border-radius: var(--radius-pill);
+  outline: none;
+}
+input[type="range"]::-webkit-slider-thumb {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  background: var(--edge-500);
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid var(--ink-1);
+  box-shadow: 0 0 0 1px var(--edge-500);
+  transition: transform var(--dur-fast) var(--ease-out);
+}
+input[type="range"]::-webkit-slider-thumb:hover { transform: scale(1.15); }
+
+/* ─── Tooltip refinado ──────────────────────────────────────────────────── */
+[data-tooltip] {
+  position: relative;
+}
+[data-tooltip]::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%) translateY(2px);
+  background: var(--ink-3);
+  color: var(--text-1);
+  padding: var(--sp-1) var(--sp-2);
+  border-radius: var(--radius-sm);
+  font-size: var(--fs-micro);
+  font-weight: 500;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--dur-fast) var(--ease-out),
+              transform var(--dur-fast) var(--ease-out);
+  box-shadow: var(--elev-3);
+  z-index: 100;
+}
+[data-tooltip]:hover::after {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ─── Image / avatar refinado ───────────────────────────────────────────── */
+img.avatar,
+.avatar img {
+  border-radius: 50%;
+  border: 2px solid var(--ink-3);
+  background: var(--ink-2);
+}
+
+/* ─── Mobile fine-tuning ────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  /* Touch targets 44px min */
+  button, a, [role="button"], input, select { min-height: 38px; }
+  .btn--sm { min-height: 32px; }
+
+  /* Sidebar drawer escapes */
+  .sidebar {
+    width: min(280px, 85vw);
+    min-width: min(280px, 85vw);
+  }
+
+  /* Hero shrinks */
+  .page-hero__title,
+  .almanac__title {
+    font-size: clamp(28px, 8vw, 40px) !important;
+  }
+  .section__title {
+    font-size: var(--fs-display-sm) !important;
+  }
+
+  /* Cards stack */
+  .grid-cards, .grid-cards--lg {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Topbar compactor */
+  .topbar { padding: 0 var(--sp-4); gap: var(--sp-2); }
+  .topbar__crumb { font-size: var(--fs-caption); }
+  .topbar__search { display: none; }
+}
+
+/* ─── Print styles (relatórios) ─────────────────────────────────────────── */
+@media print {
+  body { background: white; color: black; }
+  .sidebar, .topbar, .bottom-nav, .btn, button { display: none !important; }
+  .main { width: 100%; }
+  .card, .pick-card { break-inside: avoid; border: 1px solid #ccc; }
+  a { color: black; text-decoration: underline; }
+}
+
+/* ─── High contrast mode support ─────────────────────────────────────────── */
+@media (prefers-contrast: more) {
+  :root {
+    --ink-4: #4a5160;
+    --ink-5: #5a6170;
+    --text-2: #e0e2e8;
+    --text-3: #a0a5b0;
+  }
+  .nav-item:hover { background: var(--ink-3); }
+  .btn { border-width: 2px; }
+}
+
+/* ─── Forced colors mode (Windows high contrast) ─────────────────────────── */
+@media (forced-colors: active) {
+  .btn--primary { background: ButtonText; color: ButtonFace; }
+  .card { border: 1px solid CanvasText; }
+  .nav-item.active { background: SelectedItem; color: SelectedItemText; }
+}
+
+/* ─── Selection (já no global mas reforço) ──────────────────────────────── */
+::selection {
+  background: var(--edge-500);
+  color: var(--text-on-edge);
+}
+
+/* ─── Sticky elements get subtle shadow ─────────────────────────────────── */
+.sticky-bar,
+.sticky-header,
+[data-sticky] {
+  position: sticky;
+  top: 0;
+  background: var(--ink-0);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  z-index: 10;
+  border-bottom: 1px solid var(--ink-4);
+}
+
+/* ─── Toast (notification slide-in) ─────────────────────────────────────── */
+.toast {
+  position: fixed;
+  top: var(--sp-5);
+  right: var(--sp-5);
+  background: var(--ink-2);
+  border: 1px solid var(--ink-4);
+  border-radius: var(--radius-md);
+  padding: var(--sp-3) var(--sp-4);
+  color: var(--text-1);
+  box-shadow: var(--elev-3);
+  animation: toast-in var(--dur-base) var(--ease-out) both;
+  z-index: 1000;
+  max-width: 400px;
+  font-size: var(--fs-body-sm);
+}
+.toast--edge { border-color: var(--edge-500); }
+.toast--neg  { border-color: var(--neg-500); }
+.toast--risk { border-color: var(--risk-500); }
+@keyframes toast-in {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ─── Disabled states refinados ──────────────────────────────────────────── */
+[disabled],
+.disabled,
+.is-disabled {
+  cursor: not-allowed !important;
+  opacity: 0.45 !important;
+  pointer-events: none !important;
+}
+
+/* ─── Code-style key combos no UI ────────────────────────────────────────── */
+kbd {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  padding: 2px 6px;
+  background: var(--ink-3);
+  border-radius: var(--radius-sm);
+  color: var(--text-3);
+  border: 1px solid var(--ink-4);
+  box-shadow: inset 0 -1px 0 var(--ink-4);
+}
+
+/* ─── Last polish: sutil noise/grain pra textura editorial (opcional) ───── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0.02;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='1' stitchTiles='stitch'/></filter><rect width='200' height='200' filter='url(%23n)' opacity='0.5'/></svg>");
+}

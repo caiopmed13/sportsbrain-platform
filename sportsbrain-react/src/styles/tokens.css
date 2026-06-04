@@ -1,0 +1,342 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   SPORTSBRAIN — DESIGN TOKENS v8.0 "ARAGÃO"
+   ─────────────────────────────────────────────────────────────────────
+   Design system completo. Dark-first, editorial trading floor.
+   Spec: docs/superpowers/specs/2026-05-29-design-v8-vision.md
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap');
+
+:root {
+  /* ─── Color tokens (dark-first, theme overrides below) ───────────────── */
+
+  /* Ink — backgrounds em layers */
+  --ink-0: #08090b;          /* root canvas */
+  --ink-1: #0d0f13;          /* surface base */
+  --ink-2: #14171d;          /* surface elevated */
+  --ink-3: #1c2029;          /* surface popover */
+  --ink-4: #262b36;          /* hairline / border default */
+  --ink-5: #353b48;          /* border hover */
+
+  /* Text */
+  --text-1: #f4f5f7;         /* primary headings, numbers */
+  --text-2: #b8bdc9;         /* body */
+  --text-3: #797f8c;         /* secondary, captions */
+  --text-4: #4d525d;         /* muted, placeholders */
+  --text-on-edge: #04231a;   /* contrast on edge bg */
+
+  /* Edge — signature accent (emerald sóbrio) */
+  --edge-50:  #ecfdf5;
+  --edge-100: #d1fae5;
+  --edge-300: #6ee7b7;
+  --edge-500: #10b981;
+  --edge-600: #059669;
+  --edge-700: #047857;
+  --edge-900: #064e3b;
+
+  /* Risk — amber (cuidado, não alarme) */
+  --risk-300: #fcd34d;
+  --risk-500: #f59e0b;
+  --risk-700: #b45309;
+
+  /* Negative — vermelho mute */
+  --neg-300:  #fca5a5;
+  --neg-500:  #ef4444;
+  --neg-700:  #b91c1c;
+
+  /* Info — azul cool (links secundários, neutralidade) */
+  --info-500: #3b82f6;
+
+  /* Glass / hairline / overlay */
+  --glass-1: rgba(255, 255, 255, 0.04);
+  --glass-2: rgba(255, 255, 255, 0.06);
+  --glass-3: rgba(255, 255, 255, 0.08);
+  --hairline: rgba(255, 255, 255, 0.06);
+  --hairline-strong: rgba(255, 255, 255, 0.12);
+  --overlay: rgba(8, 9, 11, 0.7);
+  --scrim: rgba(8, 9, 11, 0.85);
+
+  /* ─── Typography ──────────────────────────────────────────────────────── */
+  --font-display: 'Inter Tight', 'Söhne Breit', system-ui, sans-serif;
+  --font-body:    'Inter', 'Söhne', system-ui, sans-serif;
+  --font-mono:    'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+  --font-serif:   'Instrument Serif', Georgia, serif;
+
+  /* Sizes (line-height embutido como --fs-*-lh) */
+  --fs-display-2xl: 72px;  --lh-display-2xl: 1.05;
+  --fs-display-xl:  56px;  --lh-display-xl:  1.08;
+  --fs-display-lg:  40px;  --lh-display-lg:  1.10;
+  --fs-display-md:  32px;  --lh-display-md:  1.15;
+  --fs-display-sm:  24px;  --lh-display-sm:  1.20;
+  --fs-heading-lg:  20px;  --lh-heading-lg:  1.25;
+  --fs-heading-md:  18px;  --lh-heading-md:  1.30;
+  --fs-heading-sm:  16px;  --lh-heading-sm:  1.40;
+  --fs-body-lg:     16px;  --lh-body-lg:     1.50;
+  --fs-body-md:     14px;  --lh-body-md:     1.50;
+  --fs-body-sm:     13px;  --lh-body-sm:     1.45;
+  --fs-caption:     12px;  --lh-caption:     1.40;
+  --fs-micro:       11px;  --lh-micro:       1.35;
+  --fs-mono-lg:     18px;
+  --fs-mono-md:     14px;
+  --fs-mono-sm:     12px;
+
+  /* Tracking */
+  --track-tightest: -0.030em;
+  --track-tighter:  -0.025em;
+  --track-tight:    -0.020em;
+  --track-snug:     -0.012em;
+  --track-normal:    0;
+  --track-loose:     0.020em;
+  --track-loosest:   0.040em;
+
+  /* ─── Spacing (4px base, extended pra editorial) ──────────────────────── */
+  --sp-0:  0;
+  --sp-1:  4px;
+  --sp-2:  8px;
+  --sp-3:  12px;
+  --sp-4:  16px;
+  --sp-5:  20px;
+  --sp-6:  24px;
+  --sp-8:  32px;
+  --sp-10: 40px;
+  --sp-12: 48px;
+  --sp-14: 56px;
+  --sp-16: 64px;
+  --sp-20: 80px;
+  --sp-24: 96px;
+
+  /* ─── Radius ──────────────────────────────────────────────────────────── */
+  --radius-sharp: 2px;
+  --radius-sm:    6px;
+  --radius-md:    10px;
+  --radius-lg:    14px;
+  --radius-xl:    20px;
+  --radius-pill:  999px;
+
+  /* ─── Elevation (layering por glass + soft shadow) ────────────────────── */
+  --elev-0: none;
+  --elev-1: inset 0 1px 0 var(--hairline), 0 0 0 1px var(--ink-4);
+  --elev-2: 0 4px 12px rgba(0, 0, 0, 0.4), 0 0 0 1px var(--ink-4);
+  --elev-3: 0 8px 24px rgba(0, 0, 0, 0.5), 0 0 0 1px var(--ink-4);
+  --elev-4: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 0 1px var(--ink-5);
+
+  /* Glow utilitários (raro, só pra hover edge states) */
+  --glow-edge: 0 0 0 3px rgba(16, 185, 129, 0.15);
+  --glow-risk: 0 0 0 3px rgba(245, 158, 11, 0.15);
+  --glow-neg:  0 0 0 3px rgba(239, 68, 68, 0.15);
+
+  /* ─── Motion ──────────────────────────────────────────────────────────── */
+  --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ease-in:  cubic-bezier(0.4, 0, 1, 1);
+  --ease-io:  cubic-bezier(0.4, 0, 0.2, 1);
+  --dur-fast: 120ms;
+  --dur-base: 200ms;
+  --dur-slow: 350ms;
+
+  /* ─── Layout ──────────────────────────────────────────────────────────── */
+  --sidebar-w:        232px;
+  --sidebar-w-collapsed: 56px;
+  --topbar-h:         56px;
+  --bottom-nav-h:     64px;
+  --container-max:    1440px;
+  --content-max:      1200px;
+  --reading-max:      720px;
+
+  /* ─── Semantic aliases (mapeamento legado v7 → v8) ───────────────────── */
+  /* Mantém compat com 50+ páginas não revisadas */
+  --bg:        var(--ink-0);
+  --ink:       var(--ink-0);
+  --ink1:      var(--ink-1);
+  --ink2:      var(--ink-2);
+  --ink3:      var(--ink-3);
+  --surface:   var(--ink-1);
+  --surface-2: var(--ink-2);
+  --surface-3: var(--ink-3);
+
+  --line:        var(--ink-4);
+  --border:      var(--ink-4);
+  --border-sub:  var(--ink-3);
+  --border-hi:   var(--ink-5);
+  --card-border: var(--ink-4);
+  --card-bg:     var(--ink-1);
+  --card-hover:  var(--glass-1);
+
+  --t1:    var(--text-1);
+  --t2:    var(--text-2);
+  --t3:    var(--text-3);
+  --white: var(--text-1);
+  --body:  var(--text-2);
+  --soft:  var(--text-3);
+  --dim:   var(--text-3);
+  --mute:  var(--text-4);
+
+  /* Cores semantic legado */
+  --blue:      var(--edge-500);
+  --blue-hi:   var(--edge-300);
+  --cyan:      var(--edge-500);
+  --cyan-hi:   var(--edge-300);
+  --b3:        rgba(16, 185, 129, 0.10);
+  --blue-dim:  rgba(16, 185, 129, 0.10);
+  --blue-glow: rgba(16, 185, 129, 0.20);
+
+  --green:      var(--edge-500);
+  --green-hi:   var(--edge-300);
+  --g3:         rgba(16, 185, 129, 0.12);
+  --green-dim:  rgba(16, 185, 129, 0.12);
+  --amber:      var(--risk-500);
+  --amber-hi:   var(--risk-300);
+  --a3:         rgba(245, 158, 11, 0.10);
+  --amber-dim:  rgba(245, 158, 11, 0.10);
+  --red:        var(--neg-500);
+  --red-hi:     var(--neg-300);
+  --r3:         rgba(239, 68, 68, 0.10);
+  --red-dim:    rgba(239, 68, 68, 0.10);
+  --purple:     #8b5cf6;
+  --p3:         rgba(139, 92, 246, 0.10);
+  --accent:     var(--edge-500);
+
+  /* Gradients (sutis, só hero/section) */
+  --accent-gradient: linear-gradient(135deg, var(--edge-500) 0%, var(--edge-700) 100%);
+  --amber-gradient:  linear-gradient(135deg, var(--risk-500) 0%, var(--risk-700) 100%);
+  --text-gradient:   linear-gradient(90deg, var(--edge-300), var(--edge-500));
+  --hero-gradient:   radial-gradient(ellipse at top, rgba(16, 185, 129, 0.08), transparent 60%);
+  --sidebar-bg:      var(--ink-1);
+  --topbar-bg:       rgba(13, 15, 19, 0.85);
+
+  /* Glows legado */
+  --glow-g: var(--glow-edge);
+  --glow-b: var(--glow-edge);
+  --glow-c: var(--glow-edge);
+  --glow-a: var(--glow-risk);
+
+  /* Shadows legado */
+  --shadow-sm:       var(--elev-1);
+  --shadow-card:     var(--elev-2);
+  --shadow-elevated: var(--elev-3);
+  --shadow-inset:    inset 0 1px 0 var(--hairline);
+
+  /* Spacing legado */
+  --sp1: var(--sp-1);
+  --sp2: var(--sp-2);
+  --sp3: var(--sp-3);
+  --sp4: var(--sp-4);
+  --sp5: var(--sp-5);
+  --sp6: var(--sp-6);
+  --sp8: var(--sp-8);
+
+  /* Font scale legado */
+  --fs-2xs:  var(--fs-micro);
+  --fs-xs:   var(--fs-micro);
+  --fs-sm:   var(--fs-caption);
+  --fs-base: var(--fs-body-sm);
+  --fs-md:   var(--fs-body-md);
+  --fs-lg:   var(--fs-body-lg);
+  --fs-xl:   var(--fs-heading-lg);
+  --fs-2xl:  var(--fs-display-sm);
+  --fs-3xl:  var(--fs-display-md);
+
+  /* Radius legado */
+  --r:      var(--radius-md);
+  --r2:     var(--radius-md);
+  --r3b:    var(--radius-lg);
+  --r-sm:   var(--radius-sm);
+  --r-md:   var(--radius-md);
+  --r-lg:   var(--radius-lg);
+  --r-xl:   var(--radius-xl);
+  --r-pill: var(--radius-pill);
+
+  /* Border utilitários legado */
+  --border-line:     1px solid var(--ink-4);
+  --border-subtle:   1px solid var(--ink-3);
+  --border-accent-b: 1px solid rgba(16, 185, 129, 0.35);
+  --border-accent-g: 1px solid rgba(16, 185, 129, 0.35);
+  --border-accent-a: 1px solid rgba(245, 158, 11, 0.35);
+
+  /* Transitions legado */
+  --transition-fast: var(--dur-fast) var(--ease-out);
+  --transition-med:  var(--dur-base) var(--ease-out);
+}
+
+/* ─── Light theme (cortesia, dark é canônico) ────────────────────────────── */
+[data-theme='light'] {
+  --ink-0: #fafafa;
+  --ink-1: #ffffff;
+  --ink-2: #f4f5f7;
+  --ink-3: #eaedf2;
+  --ink-4: #d8dde6;
+  --ink-5: #c0c7d2;
+
+  --text-1: #0a0c10;
+  --text-2: #3a414d;
+  --text-3: #6b7280;
+  --text-4: #9aa3b0;
+
+  --glass-1: rgba(10, 12, 16, 0.03);
+  --glass-2: rgba(10, 12, 16, 0.05);
+  --glass-3: rgba(10, 12, 16, 0.08);
+  --hairline: rgba(10, 12, 16, 0.08);
+  --hairline-strong: rgba(10, 12, 16, 0.16);
+
+  --elev-1: inset 0 1px 0 rgba(255, 255, 255, 0.8), 0 0 0 1px var(--ink-4);
+  --elev-2: 0 4px 12px rgba(10, 12, 16, 0.08), 0 0 0 1px var(--ink-4);
+  --elev-3: 0 8px 24px rgba(10, 12, 16, 0.12), 0 0 0 1px var(--ink-4);
+  --elev-4: 0 20px 40px rgba(10, 12, 16, 0.16), 0 0 0 1px var(--ink-5);
+
+  --topbar-bg: rgba(255, 255, 255, 0.85);
+  --sidebar-bg: var(--ink-2);
+
+  /* Legacy aliases reaplicados pra light */
+  --bg: var(--ink-0);
+  --surface: var(--ink-1);
+  --card-bg: var(--ink-1);
+  --card-hover: var(--glass-1);
+  --border: var(--ink-4);
+  --line: var(--ink-4);
+  --t1: var(--text-1);
+  --t2: var(--text-2);
+  --t3: var(--text-3);
+  --body: var(--text-2);
+  --soft: var(--text-3);
+  --mute: var(--text-4);
+  --shadow-card: var(--elev-2);
+  --shadow-elevated: var(--elev-3);
+}
+
+/* ─── Utilities globais (typography helpers) ─────────────────────────────── */
+
+.text-tabular {
+  font-variant-numeric: tabular-nums slashed-zero;
+}
+
+.text-mono {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums slashed-zero;
+}
+
+.text-display {
+  font-family: var(--font-display);
+  letter-spacing: var(--track-tight);
+  font-weight: 700;
+}
+
+.text-serif {
+  font-family: var(--font-serif);
+  letter-spacing: var(--track-snug);
+}
+
+/* Reduced motion respect */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur-fast: 0ms;
+    --dur-base: 0ms;
+    --dur-slow: 0ms;
+    --transition-fast: 0ms;
+    --transition-med:  0ms;
+  }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

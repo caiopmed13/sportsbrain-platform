@@ -1,0 +1,70 @@
+name = "sportsbrain-api"
+main = "src/index.js"
+compatibility_date = "2024-11-01"
+compatibility_flags = ["nodejs_compat"]
+# P3.9 R6K-F2.7-B: `usage_model = "unbound"` removido — campo deprecado em
+# wrangler 4.x (causava warning "Unexpected fields" em todo deploy). Em
+# Workers Paid (Standard model), 30s CPU é default sem precisar deste campo.
+# Em Workers Free, CPU continua limitado a 10-50ms independente da config.
+# Account tier determina CPU budget, não config aqui.
+
+[vars]
+SB_VERSION = "4.5.0"
+SB_API_VERSION = "4.5.0"
+SB_ENV = "production"
+# F2.26-A.2 — bounded signal enrichment opt-in.
+# Sem essa var, getEnrichmentTopN retorna null → enrichment processa
+# todos os ~300 picks → ~960 subrequests D1 → estoura budget Worker.
+# Com TOP_N=40, processa só top-40 picks pre-score → ~166 subrequests →
+# cold path corta ~7-12s do gargalo principal (audit RANK 1).
+# Reversível: deletar essa linha e re-deploy.
+PREMIUM_ENRICHMENT_TOP_N = "40"
+
+# ── KV Namespaces ──────────────────────────────────────────────────────────
+# REMOVIDO: SB_CACHE e SB_HISTORY foram migrados para a Cloudflare Cache API
+# (gratuita, ilimitada). KV free tier = 1.000 puts/dia era insuficiente.
+# O CacheService agora usa caches.default (Cache API nativa do Worker).
+
+# ── D1 Database ───────────────────────────────────────────────────────────
+[[d1_databases]]
+binding = "SB_DB"
+database_name = "sportsbrain-db"
+database_id = "984fa15a-3e26-4766-8df4-bd09d239002d"
+
+# ── Neon Postgres (long-term odds history, 2y retention) ─────────────────
+# Via HTTP driver @neondatabase/serverless (não usa Hyperdrive — HTTP bypassa TCP).
+# Auth: wrangler secret put NEON_URL
+# Schema: migrations/neon_init.sql (24 monthly partitions aplicadas)
+
+# ── Rate Limiting ─────────────────────────────────────────────────────────
+[[unsafe.bindings]]
+name = "SB_RATE_LIMITER"
+type = "ratelimit"
+namespace_id = "1001"
+simple = { limit = 1000, period = 60 }
+
+# ── Cron Triggers ────────────────────────────────────────────────────────
+# "0 * * * *"     → toda hora: auto-verifica picks pendentes via ESPN
+# "0 5 * * *"     → 05:00 UTC (02:00 Brasília): ingest histórico + prune + referee collector
+# "*/5 * * * *"   → a cada 5min: snapshot odds + steam detector
+# "*/15 * * * *"  → a cada 15min: health monitor + lineup collector
+# "0 */3 * * *"   → a cada 3h: form collector (API-Football last-5 form)
+# NOTE: 5 cron limit on free plan — referee runs at 05:00 UTC (merged with daily ingest)
+[triggers]
+crons = ["0 * * * *", "0 5 * * *", "*/5 * * * *", "*/15 * * * *", "0 */3 * * *"]
+
+# ── Durable Objects ──────────────────────────────────────────────────────
+# OddsRoom — broadcast de updates de odds via WebSocket por event_id
+[[durable_objects.bindings]]
+name = "ODDS_ROOM"
+class_name = "OddsRoom"
+
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["OddsRoom"]
+
+# ── Secrets (set via: wrangler secret put NAME) ───────────────────────────
+# FOOTBALL_DATA_API_KEY   → football-data.org free key
+# API_FOOTBALL_KEY        → API-Football (RapidAPI) key
+# SB_MASTER_KEY           → SportsBrain internal auth token
+# ODDS_API_KEY            → REMOVED. Engine proprietário (Pinnacle+Bovada) substituiu.

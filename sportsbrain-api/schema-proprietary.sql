@@ -1,0 +1,6 @@
+-- ─────────────────────────────────────────────────────────────
+-- PROPRIETARY DATA SCHEMA — withheld from the public portfolio.
+-- The production schema (proprietary odds/signal tables) is intentionally
+-- omitted. Public schema files (schema.sql, schema-tier1/2, schema-picks,
+-- schema-odds) remain in the repo to illustrate the data model.
+-- ─────────────────────────────────────────────────────────────

@@ -1,0 +1,357 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   SportsBrain — Humanize layer v8 "Aragão"
+   ─────────────────────────────────────────────────────────────────────
+   Remove "ar de IA": adiciona profundidade visual, serif moments,
+   hierarquia tipográfica forte, surfaces variadas, brand voice.
+   Importado por ÚLTIMO em main.jsx.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ─── Surfaces VARIADAS (não tudo igual ink-1) ──────────────────────────── */
+.kpi-card,
+.metric-card,
+.kpi-row > * {
+  background: linear-gradient(180deg, var(--ink-2) 0%, var(--ink-1) 100%) !important;
+  border-color: var(--ink-4) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.04),
+    0 1px 0 rgba(0, 0, 0, 0.3) !important;
+  position: relative;
+}
+.kpi-card::before,
+.metric-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 60% 50% at 0% 0%, rgba(16, 185, 129, 0.06), transparent 70%);
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+/* Premium card "hero" — destacar com edge subtle border */
+.pick-card[data-tier="elite"],
+.pick-card[data-quality="elite"],
+.faixa-method-card[data-tier="elite"] {
+  border-color: rgba(16, 185, 129, 0.35) !important;
+  background: linear-gradient(180deg,
+    rgba(16, 185, 129, 0.05) 0%,
+    var(--ink-1) 25%) !important;
+}
+
+/* Faixa-method-card refinement — top border accent edge subtle */
+.faixa-method-card {
+  background: linear-gradient(180deg,
+    rgba(255, 255, 255, 0.015) 0%,
+    var(--ink-1) 60%) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.03),
+    0 2px 6px rgba(0, 0, 0, 0.25) !important;
+}
+
+/* ─── EDITORIAL: serif italic moments em headings ────────────────────────── */
+/* Em todo h1/título principal, italiciza palavras-chave em italic serif */
+.page-hero__title em,
+.almanac__title em,
+.section__title em,
+h1 em, h2 em,
+.page-header h1 em {
+  font-family: var(--font-serif) !important;
+  font-style: italic !important;
+  font-weight: 400 !important;
+  color: var(--edge-300) !important;
+  letter-spacing: 0 !important;
+  padding: 0 0.05em;
+}
+
+/* Title em h1 que não tem <em> ganha um asterisco editorial discreto */
+.page-hero h1::after,
+.almanac__title:not(:has(em))::after {
+  content: '';
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  background: var(--edge-500);
+  border-radius: 50%;
+  margin-left: 12px;
+  vertical-align: 18%;
+  box-shadow: 0 0 12px rgba(16, 185, 129, 0.5);
+}
+
+/* ─── Editorial eyebrow padrão em sections ───────────────────────────────── */
+.faixa-methods-method__title::before {
+  background: linear-gradient(180deg, var(--edge-500) 0%, var(--edge-700) 100%) !important;
+  box-shadow: 0 0 12px rgba(16, 185, 129, 0.4) !important;
+}
+
+/* ─── Asymmetric divider ornamental ─────────────────────────────────────── */
+.section + .section::before,
+.faixa-methods-method + .faixa-methods-method::before {
+  content: '';
+  display: block;
+  width: 40px;
+  height: 1px;
+  background: var(--edge-500);
+  margin: var(--sp-10) 0 var(--sp-8);
+  position: relative;
+}
+
+/* ─── Hero gradient mais sofisticado ────────────────────────────────────── */
+.page-hero,
+.almanac__masthead {
+  background:
+    radial-gradient(ellipse 80% 60% at 100% 0%, rgba(16, 185, 129, 0.045), transparent 60%),
+    radial-gradient(ellipse 60% 40% at 0% 100%, rgba(245, 158, 11, 0.025), transparent 60%),
+    var(--ink-1) !important;
+  border-bottom: 1px solid var(--ink-4) !important;
+  position: relative;
+}
+.page-hero::after,
+.almanac__masthead::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='400'><defs><pattern id='g' width='40' height='40' patternUnits='userSpaceOnUse'><circle cx='1' cy='1' r='0.5' fill='%23ffffff' opacity='0.04'/></pattern></defs><rect width='400' height='400' fill='url(%23g)'/></svg>");
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+/* ─── Number-first display: stat values BIGGER and bolder ───────────────── */
+.kpi-card__value,
+.metric-card__value,
+.kpi-value,
+.stat__value {
+  font-size: clamp(28px, 3.2vw, 40px) !important;
+  font-weight: 700 !important;
+  line-height: 0.95 !important;
+  letter-spacing: -0.025em !important;
+  background: linear-gradient(180deg, var(--text-1) 0%, var(--text-2) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ─── Hover refinements ─────────────────────────────────────────────────── */
+.faixa-method-card:hover,
+.pick-card:hover,
+.match-card:hover {
+  border-color: rgba(16, 185, 129, 0.25) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.05),
+    0 8px 24px rgba(0, 0, 0, 0.35),
+    0 0 0 1px rgba(16, 185, 129, 0.15) !important;
+}
+
+/* ─── Sidebar logo refinement ───────────────────────────────────────────── */
+.sidebar-logo-icon {
+  background: linear-gradient(135deg, var(--edge-500) 0%, var(--edge-700) 100%) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.25),
+    0 0 12px rgba(16, 185, 129, 0.35),
+    0 1px 3px rgba(0, 0, 0, 0.4) !important;
+}
+
+/* ─── Sidebar title gradient ─────────────────────────────────────────────── */
+.sidebar-logo-title {
+  background: linear-gradient(180deg, #ffffff 0%, var(--text-2) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ─── Active nav-item glow refined ──────────────────────────────────────── */
+.nav-item.active {
+  background: linear-gradient(90deg,
+    rgba(16, 185, 129, 0.08) 0%,
+    var(--ink-2) 30%) !important;
+}
+.nav-item.active::before {
+  background: linear-gradient(180deg, var(--edge-300) 0%, var(--edge-500) 100%) !important;
+  box-shadow: 0 0 8px rgba(16, 185, 129, 0.5) !important;
+  width: 3px !important;
+}
+
+/* ─── Brand voice: replace generic phrases ──────────────────────────────── */
+/* (Via attribute selectors em elementos que conhecemos) */
+.page-hero__eyebrow,
+.almanac__edition span:first-child,
+.section__eyebrow {
+  font-family: var(--font-serif) !important;
+  font-style: italic !important;
+  font-weight: 400 !important;
+  font-size: var(--fs-caption) !important;
+  color: var(--edge-300) !important;
+  letter-spacing: 0 !important;
+  text-transform: none !important;
+}
+
+/* ─── Method titles ganham acento serif quando contém keyword ───────────── */
+.faixa-methods-method__title {
+  font-family: var(--font-display) !important;
+  position: relative;
+}
+
+/* ─── Cobertura mãe ícone — substituir 💡 por svg-look via mask ─────────── */
+.faixa-cobertura-mae__icon {
+  font-size: 0 !important;
+}
+.faixa-cobertura-mae__icon::before {
+  content: '';
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background: var(--edge-500);
+  -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><circle cx='12' cy='12' r='10'/><line x1='12' y1='8' x2='12' y2='12'/><line x1='12' y1='16' x2='12.01' y2='16'/></svg>") center / contain no-repeat;
+  mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><circle cx='12' cy='12' r='10'/><line x1='12' y1='8' x2='12' y2='12'/><line x1='12' y1='16' x2='12.01' y2='16'/></svg>") center / contain no-repeat;
+}
+
+/* ─── Improvement: tabs com font display em maior peso ──────────────────── */
+.almanac__tab.active,
+.section-tab.active,
+[role="tab"][aria-selected="true"] {
+  font-family: var(--font-display) !important;
+  letter-spacing: var(--track-snug) !important;
+}
+
+/* ─── Section header sub adiciona pull-quote feel ───────────────────────── */
+.section__subtitle,
+.page-hero__subtitle,
+.almanac__subtitle {
+  font-family: var(--font-body) !important;
+  font-size: var(--fs-body-lg) !important;
+  color: var(--text-2) !important;
+  line-height: 1.55 !important;
+  position: relative;
+  padding-left: var(--sp-4);
+  border-left: 2px solid var(--edge-500);
+}
+
+/* ─── Editorial column line ─────────────────────────────────────────────── */
+.almanac__subtitle::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(180deg, var(--edge-500) 0%, transparent 100%);
+  border-radius: 2px;
+}
+
+/* ─── Stats hero — display gigante refinado ─────────────────────────────── */
+.page-hero__stats > .stat .stat__value,
+.almanac__stats > .almanac__stat strong {
+  font-family: var(--font-mono) !important;
+  font-feature-settings: 'tnum', 'zero' !important;
+  font-variant-numeric: tabular-nums slashed-zero !important;
+}
+
+/* ─── KBD refinado ─────────────────────────────────────────────────────── */
+.topbar__search-key {
+  background: linear-gradient(180deg, var(--ink-3) 0%, var(--ink-2) 100%) !important;
+  border: 1px solid var(--ink-4) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.3) !important;
+  font-weight: 600 !important;
+}
+
+/* ─── Cards com dividers internos ornamentais ───────────────────────────── */
+.faixa-method-group__expanded {
+  background: linear-gradient(180deg,
+    rgba(0, 0, 0, 0.2) 0%,
+    transparent 50%) !important;
+}
+
+/* ─── Cobertura mãe — refinamento total ─────────────────────────────────── */
+.faixa-cobertura-mae {
+  background: linear-gradient(180deg,
+    rgba(16, 185, 129, 0.06) 0%,
+    transparent 100%) !important;
+  border: 1px solid !important;
+  border-image: linear-gradient(180deg,
+    rgba(16, 185, 129, 0.4),
+    rgba(16, 185, 129, 0.1)) 1 !important;
+}
+.faixa-cobertura-mae__header {
+  background: linear-gradient(180deg,
+    rgba(16, 185, 129, 0.1) 0%,
+    rgba(16, 185, 129, 0.04) 100%) !important;
+}
+
+/* ─── Button primary refinement ─────────────────────────────────────────── */
+.btn--primary {
+  background: linear-gradient(180deg, var(--edge-500) 0%, var(--edge-600) 100%) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    0 1px 3px rgba(0, 0, 0, 0.3),
+    0 0 0 1px var(--edge-700) !important;
+  font-weight: 600 !important;
+}
+.btn--primary:hover {
+  background: linear-gradient(180deg, var(--edge-300) 0%, var(--edge-500) 100%) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    0 4px 12px rgba(16, 185, 129, 0.35),
+    0 0 0 1px var(--edge-500) !important;
+}
+
+/* ─── Footer touch: subtle quote bar in empty states ────────────────────── */
+.empty {
+  position: relative;
+  border-top: 1px solid var(--ink-4);
+  border-bottom: 1px solid var(--ink-4);
+  background: linear-gradient(180deg, var(--ink-1) 0%, transparent 100%);
+}
+.empty::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 1px;
+  background: var(--edge-500);
+}
+
+/* ─── Topbar status pill gradient ───────────────────────────────────────── */
+.pill--status {
+  background: linear-gradient(180deg, var(--ink-2) 0%, var(--ink-1) 100%) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05) !important;
+}
+.pill--edge {
+  background: linear-gradient(180deg,
+    rgba(16, 185, 129, 0.15) 0%,
+    rgba(16, 185, 129, 0.08) 100%) !important;
+}
+
+/* ─── Loading state com pulsação edge ───────────────────────────────────── */
+.skeleton {
+  background-image: linear-gradient(90deg,
+    var(--ink-2) 0%,
+    rgba(16, 185, 129, 0.05) 30%,
+    var(--ink-3) 50%,
+    rgba(16, 185, 129, 0.05) 70%,
+    var(--ink-2) 100%) !important;
+}
+
+/* ─── Sidebar user avatar gradient ──────────────────────────────────────── */
+.sidebar-user__avatar {
+  background: linear-gradient(135deg,
+    var(--ink-3) 0%,
+    var(--ink-2) 100%) !important;
+  border: 1px solid var(--ink-4) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05) !important;
+}
+
+/* ─── Hide emoji glyphs em headings principais (mascarar visual) ────────── */
+/* Truque: usar text-indent só nas primeiras posições + reset nos demais —
+   funciona se emoji estiver no início. Risk: trunca textos legítimos.
+   Em vez disso, deixamos JS handle (humanize-strip.js) */
+
+/* ─── Print refinement ──────────────────────────────────────────────────── */
+@media print {
+  .page-hero__title em, h1 em {
+    color: #000 !important;
+    text-decoration: underline;
+  }
+}

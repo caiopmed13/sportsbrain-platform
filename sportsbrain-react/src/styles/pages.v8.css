@@ -1,0 +1,378 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   SportsBrain — Pages v8 "Aragão" overlay
+   ─────────────────────────────────────────────────────────────────────
+   Overlay CSS global que migra páginas legadas (Banca, Palpites, Aumentadas,
+   Performance, Tipsters, etc) pro look v8 sem rewrite do JSX.
+   Importado em main.jsx logo após global.css.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ─── Page wrappers comuns ───────────────────────────────────────────────── */
+.page-wrap,
+.banca-page,
+.palpites-page,
+.aument-page,
+.performance-page,
+.tipsters-page,
+.combos-page,
+.analise-page,
+.alerts-page,
+.shadow-page {
+  background: var(--ink-0);
+  color: var(--text-2);
+  font-family: var(--font-body);
+  min-height: 100%;
+  padding: var(--sp-6) var(--sp-8);
+  max-width: var(--container-max);
+  margin: 0 auto;
+}
+
+@media (max-width: 1024px) {
+  .page-wrap, .banca-page, .palpites-page, .aument-page,
+  .performance-page, .tipsters-page, .combos-page, .analise-page,
+  .alerts-page, .shadow-page {
+    padding: var(--sp-5) var(--sp-5);
+  }
+}
+@media (max-width: 768px) {
+  .page-wrap, .banca-page, .palpites-page, .aument-page,
+  .performance-page, .tipsters-page, .combos-page, .analise-page,
+  .alerts-page, .shadow-page {
+    padding: var(--sp-4) var(--sp-4);
+  }
+}
+
+/* ─── Page header pattern (universal) ────────────────────────────────────── */
+.page-header,
+.page-title-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--sp-4);
+  padding: var(--sp-6) 0 var(--sp-5);
+  border-bottom: 1px solid var(--ink-4);
+  margin-bottom: var(--sp-6);
+}
+.page-header h1,
+.page-header h2,
+.page-title-row h1 {
+  font-family: var(--font-display);
+  font-size: var(--fs-display-md);
+  font-weight: 700;
+  letter-spacing: var(--track-tight);
+  color: var(--text-1);
+  line-height: 1.1;
+  text-transform: none;
+}
+.page-header p,
+.page-title-row p {
+  font-size: var(--fs-body-md);
+  color: var(--text-3);
+  margin-top: var(--sp-2);
+  max-width: var(--reading-max);
+}
+
+/* ─── KPI / Stat row (frequente em Banca, Performance) ──────────────────── */
+.kpi-row,
+.stat-row,
+.metrics-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: var(--sp-5);
+  margin-bottom: var(--sp-6);
+}
+.kpi-row > *,
+.stat-row > *,
+.metrics-row > *,
+.kpi-card,
+.metric-card {
+  background: var(--ink-1);
+  border: 1px solid var(--ink-4);
+  border-radius: var(--radius-lg);
+  padding: var(--sp-4) var(--sp-5);
+  position: relative;
+  overflow: hidden;
+}
+.kpi-card__label,
+.metric-card__label,
+.kpi-label {
+  font-size: var(--fs-micro);
+  color: var(--text-3);
+  font-weight: 500;
+  letter-spacing: var(--track-loose);
+  text-transform: uppercase;
+  margin-bottom: var(--sp-2);
+}
+.kpi-card__value,
+.metric-card__value,
+.kpi-value {
+  font-family: var(--font-display);
+  font-size: var(--fs-display-sm);
+  font-weight: 700;
+  color: var(--text-1);
+  line-height: 1;
+  letter-spacing: var(--track-tight);
+  font-variant-numeric: tabular-nums slashed-zero;
+}
+.kpi-card__delta {
+  font-family: var(--font-mono);
+  font-size: var(--fs-mono-sm);
+  font-weight: 600;
+  margin-top: var(--sp-2);
+  font-variant-numeric: tabular-nums;
+}
+.kpi-card__delta--up,
+.delta-up,
+.text-green { color: var(--edge-500) !important; }
+.kpi-card__delta--down,
+.delta-down,
+.text-red { color: var(--neg-500) !important; }
+
+/* ─── Generic cards (legacy .card / .pick-card / .stat-card) ─────────────── */
+.pick-card,
+.stat-card,
+.list-card,
+.match-card,
+.tip-card,
+.combo-card,
+.boost-card,
+.alert-card {
+  background: var(--ink-1) !important;
+  border: 1px solid var(--ink-4) !important;
+  border-radius: var(--radius-lg) !important;
+  padding: var(--sp-4) !important;
+  transition: border-color var(--dur-fast) var(--ease-out) !important;
+  color: var(--text-2) !important;
+}
+.pick-card:hover,
+.stat-card:hover,
+.match-card:hover,
+.tip-card:hover,
+.combo-card:hover,
+.boost-card:hover,
+.alert-card:hover {
+  border-color: var(--ink-5) !important;
+}
+
+/* ─── Tables ─────────────────────────────────────────────────────────────── */
+table.data-table,
+.data-table,
+table.list-table,
+.list-table,
+table.standings-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--ink-1);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--ink-4);
+  font-size: var(--fs-body-sm);
+}
+.data-table thead th,
+.list-table thead th,
+.standings-table thead th {
+  background: var(--ink-2);
+  color: var(--text-3);
+  font-weight: 600;
+  font-size: var(--fs-micro);
+  letter-spacing: var(--track-loose);
+  text-transform: uppercase;
+  padding: var(--sp-3) var(--sp-4);
+  text-align: left;
+  border-bottom: 1px solid var(--ink-4);
+}
+.data-table tbody td,
+.list-table tbody td,
+.standings-table tbody td {
+  padding: var(--sp-3) var(--sp-4);
+  border-bottom: 1px solid var(--ink-3);
+  color: var(--text-2);
+}
+.data-table tbody tr:last-child td,
+.list-table tbody tr:last-child td,
+.standings-table tbody tr:last-child td { border-bottom: none; }
+.data-table tbody tr:hover,
+.list-table tbody tr:hover,
+.standings-table tbody tr:hover { background: var(--ink-2); }
+
+/* Números em mono */
+.data-table td.num,
+.data-table td.odd,
+.data-table td.ev,
+.data-table td.prob,
+.list-table td.num,
+.list-table td.value {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums slashed-zero;
+  text-align: right;
+  font-weight: 600;
+}
+
+/* ─── Form fields (legacy) ──────────────────────────────────────────────── */
+input[type="text"], input[type="search"], input[type="number"],
+input[type="date"], input[type="time"], textarea, select {
+  background: var(--ink-2);
+  border: 1px solid var(--ink-4);
+  border-radius: var(--radius-md);
+  color: var(--text-1);
+  font-family: var(--font-body);
+  font-size: var(--fs-body-sm);
+  padding: var(--sp-2) var(--sp-3);
+  transition: border-color var(--dur-fast) var(--ease-out);
+}
+input:focus, textarea:focus, select:focus {
+  outline: none;
+  border-color: var(--edge-500);
+  box-shadow: var(--glow-edge);
+}
+input::placeholder, textarea::placeholder {
+  color: var(--text-4);
+}
+label {
+  font-size: var(--fs-caption);
+  color: var(--text-3);
+  font-weight: 500;
+}
+
+/* ─── Buttons legacy (.btn, .button) ─────────────────────────────────────── */
+.button,
+button.cta,
+button.action-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-2);
+  height: 36px;
+  padding: 0 var(--sp-4);
+  border-radius: var(--radius-md);
+  font-family: var(--font-body);
+  font-size: var(--fs-body-sm);
+  font-weight: 600;
+  letter-spacing: var(--track-snug);
+  background: var(--ink-2);
+  color: var(--text-1);
+  border: 1px solid var(--ink-4);
+  cursor: pointer;
+  transition: background var(--dur-fast) var(--ease-out),
+              border-color var(--dur-fast) var(--ease-out);
+}
+.button:hover,
+button.cta:hover,
+button.action-button:hover {
+  background: var(--ink-3);
+  border-color: var(--ink-5);
+}
+.button.primary,
+button.cta.primary {
+  background: var(--edge-500);
+  color: var(--text-on-edge);
+  border-color: var(--edge-500);
+}
+.button.primary:hover,
+button.cta.primary:hover {
+  background: var(--edge-600);
+}
+
+/* ─── Headings global ────────────────────────────────────────────────────── */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--text-1);
+  font-family: var(--font-display);
+  letter-spacing: var(--track-snug);
+  line-height: 1.2;
+}
+h1 { font-size: var(--fs-display-md); font-weight: 700; }
+h2 { font-size: var(--fs-display-sm); font-weight: 700; }
+h3 { font-size: var(--fs-heading-lg); font-weight: 600; }
+h4 { font-size: var(--fs-heading-md); font-weight: 600; }
+h5 { font-size: var(--fs-heading-sm); font-weight: 600; }
+h6 { font-size: var(--fs-body-md); font-weight: 600; }
+
+/* ─── Anchors / links ────────────────────────────────────────────────────── */
+a {
+  color: var(--edge-500);
+  text-decoration: none;
+  transition: color var(--dur-fast) var(--ease-out);
+}
+a:hover { color: var(--edge-300); }
+
+/* ─── Code / pre ─────────────────────────────────────────────────────────── */
+code, pre, kbd {
+  font-family: var(--font-mono);
+  font-size: 0.92em;
+  background: var(--ink-2);
+  padding: 2px 6px;
+  border-radius: var(--radius-sm);
+  color: var(--text-1);
+  border: 1px solid var(--ink-4);
+}
+pre {
+  padding: var(--sp-4);
+  overflow-x: auto;
+}
+pre code { background: transparent; border: none; padding: 0; }
+
+/* ─── Lists ─────────────────────────────────────────────────────────────── */
+ul, ol { color: var(--text-2); }
+
+/* ─── Charts / SVG containers (Recharts wrappers) ────────────────────────── */
+.recharts-cartesian-grid line,
+.recharts-cartesian-axis-line { stroke: var(--ink-4); }
+.recharts-cartesian-axis-tick-value { fill: var(--text-3); font-size: 11px; }
+.recharts-tooltip-wrapper { outline: none; }
+.recharts-default-tooltip {
+  background: var(--ink-2) !important;
+  border: 1px solid var(--ink-4) !important;
+  border-radius: var(--radius-md) !important;
+  color: var(--text-1) !important;
+  font-family: var(--font-body) !important;
+}
+.recharts-tooltip-label { color: var(--text-3) !important; }
+
+/* ─── Notif / banner / alert ─────────────────────────────────────────────── */
+.banner,
+.notice,
+.alert,
+.callout {
+  background: var(--ink-2);
+  border: 1px solid var(--ink-4);
+  border-radius: var(--radius-md);
+  padding: var(--sp-3) var(--sp-4);
+  color: var(--text-2);
+  margin: var(--sp-3) 0;
+  position: relative;
+}
+.banner--info,
+.alert--info { border-color: rgba(59, 130, 246, 0.4); background: rgba(59, 130, 246, 0.08); color: #93c5fd; }
+.banner--warning,
+.alert--warning { border-color: rgba(245, 158, 11, 0.4); background: rgba(245, 158, 11, 0.08); color: var(--risk-300); }
+.banner--success,
+.alert--success { border-color: rgba(16, 185, 129, 0.4); background: rgba(16, 185, 129, 0.08); color: var(--edge-300); }
+.banner--error,
+.alert--error,
+.alert--danger { border-color: rgba(239, 68, 68, 0.4); background: rgba(239, 68, 68, 0.08); color: var(--neg-300); }
+
+/* ─── Status indicators (legacy) ─────────────────────────────────────────── */
+.status-ok, .status-good { color: var(--edge-500) !important; }
+.status-warning, .status-warn { color: var(--risk-500) !important; }
+.status-err, .status-error, .status-bad { color: var(--neg-500) !important; }
+
+/* ─── Number formatting (legacy) ─────────────────────────────────────────── */
+.num,
+.numeric,
+.value,
+.odd,
+.price {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums slashed-zero;
+}
+
+/* ─── Loading spinner ─────────────────────────────────────────────────────── */
+.spinner,
+.loader {
+  width: 24px;
+  height: 24px;
+  border: 2px solid var(--ink-4);
+  border-top-color: var(--edge-500);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }

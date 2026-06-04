@@ -1,0 +1,11 @@
+{
+  "name": "sportsbrain-ml",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "train": "node train-model.mjs"
+  },
+  "dependencies": {
+    "undici": "^6.0.0"
+  }
+}
